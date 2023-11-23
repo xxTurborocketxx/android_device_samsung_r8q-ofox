@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-# Inherit from a52q device
-$(call inherit-product, device/samsung/a52q/device.mk)
+# Inherit from r8q device
+$(call inherit-product, device/samsung/r8q/device.mk)
 
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/twrp/config/common.mk)
