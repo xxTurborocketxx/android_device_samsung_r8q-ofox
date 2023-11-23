@@ -1,9 +1,9 @@
 # Device release name
-ro.display.series=Samsung Galaxy A52
+ro.display.series=Samsung Galaxy S20 FE
 
 # product/board stuff
-ro.product.board=atoll
-ro.board.platform=atoll
+ro.product.board=kona
+ro.board.platform=kona
 
 # USB and MTP stuff
 persist.sys.usb.config=mtp
