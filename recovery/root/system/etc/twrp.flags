@@ -40,4 +40,4 @@ odm                 /odm         erofs       ro                                 
 /external_sd        auto         /dev/block/mmcblk0p1  /dev/block/mmcblk0        flags=display="MicroSD Card";storage;wipeingui;removable
 /usb_otg            auto         /dev/block/sdg1       /dev/block/sdg            flags=display="USB-OTG";storage;wipeingui;removable
 
-/firmware           vfat         /dev/block/bootdevice/by-name/apnhlos           flags=display="Firmware";mounttodecrypt
+/firmware           vfat         /dev/block/bootdevice/by-name/apnhlos           flags=display="Firmware"
