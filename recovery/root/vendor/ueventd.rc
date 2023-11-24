@@ -58,12 +58,11 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /dev/ipa_odl_ctl          0660   radio      radio
 /dev/ipa_adpl             0660   system     oem_2905
 /dev/synx_device          0660   root       camera
+/dev/hab                  0666   system     system
+/dev/iio:device*          0664   system     system
 
 # dev ril bridge
 /dev/drb	              0660   system     radio
-
-/dev/hab                  0666   system     system
-/dev/iio:device*          0664   system     system
 
 #permissions for UFS RPMB BSG device node
 /dev/0:0:0:49476          0600   system     system
@@ -73,7 +72,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /dev/android_ssusbcon    0660     system        system
 /sys/class/android_usb/android0  f_rndis/ethaddr      0660  system   system
 /sys/class/android_usb/android0  terminal_version     0660  system   system
-
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
 
@@ -137,9 +135,9 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /dev/hsicctl16            0640   radio      radio
 /dev/mhi_*_pipe_14        0640   radio      radio
 /dev/mhi_*_pipe_16        0640   radio      radio
-/dev/mhi_*_pipe_32        0640   radio      radio
+/dev/mhi_*_pipe_32        0660   system      radio
 /dev/at_usb0              0640   radio      radio
-/dev/at_mdm0              0660   system     radio
+/dev/at_mdm0              0640   system      radio
 /dev/video*               0660   system     camera
 /dev/cvp*                 0660   system     camera
 /dev/media*               0660   system     camera
@@ -190,8 +188,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
-/sys/devices/platform/soc/18800000.qcom,icnss/net/wlan*/queues/rx-* rps_cpus      0660   system     system
-/sys/devices/platform/soc/1c00000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan*/queues/rx-* rps_cpus      0660   system     system
 /dev/spidev0.0            0660   system     audio
 /dev/i2c-7                0660   system     audio
 /dev/msm_camera/*         0660   system     camera
@@ -331,6 +327,9 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 # SSR devices
 /dev/subsys_*         0640   system     system
 
+# Modem silentreset device
+/dev/esoc-0         0660   root     radio
+
 # Ultrasound device
 /dev/usf1                 0660   system     system
 
@@ -362,15 +361,12 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 
 # Reactivation Lock
 /dev/block/platform/soc/1d84000.ufshc/by-name/steady    0660    system    system
-/dev/block/platform/soc/7c4000.sdhci/by-name/steady    0660    system    system
 
 # Google FRP solution
 /dev/block/platform/soc/1d84000.ufshc/by-name/persistent    0660    system    system
-/dev/block/platform/soc/7c4000.sdhci/by-name/persistent    0660    system    system
 
 # Param permission
 /dev/block/platform/soc/1d84000.ufshc/by-name/param    0660    root    system
-/dev/block/platform/soc/7c4000.sdhci/by-name/param    0660    root    system
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system
@@ -433,8 +429,6 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /sys/class/graphics/fb0     msm_cmd_autorefresh_en   0664    system  graphics
 */
 
-/sys/devices/platform/soc/ae00000.qcom,mdss_mdp power/control 0664 system graphics
-
 #asm330 sensor
 #common sensors files
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   buffer/enable                   0664    system  system
@@ -495,3 +489,32 @@ firmware_directories /vendor/firmware_mnt/image/ /vendor/firmware-modem/image/
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   in_temp_raw                     0664    system  system
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   in_temp_scale                   0664    system  system
 /sys/devices/platform/soc/*.i2c/i2c-*/*-*/iio:device*   in_temp_scale_available         0664    system  system
+
+
+# flicker sensor
+/sys/class/sensors/als_rear    name                    0444    system    radio
+/sys/class/sensors/als_rear    vendor                  0444    system    radio
+/sys/class/sensors/als_rear    part_type               0444    system    radio
+/sys/class/sensors/als_rear    device_id               0444    system    radio
+/sys/class/sensors/als_rear    als_flush               0220    system    radio
+/sys/class/sensors/als_rear    write_reg               0220    system    system
+/sys/class/sensors/als_rear    read_reg                0664    system    system
+/sys/class/sensors/als_rear    eol_mode                0664    system    system
+/sys/class/sensors/als_rear    eol_spec                0444    system    system
+/sys/class/sensors/als_rear    als_factory_cmd         0444    system    system
+/sys/class/sensors/als_rear    als_red                 0444    system    system
+/sys/class/sensors/als_rear    als_green               0444    system    system
+/sys/class/sensors/als_rear    als_blue                0444    system    system
+/sys/class/sensors/als_rear    als_ir                  0444    system    system
+/sys/class/sensors/als_rear    als_clear               0444    system    system
+/sys/class/sensors/als_rear    als_wideband            0444    system    system
+/sys/class/sensors/als_rear    als_version             0444    system    system
+/sys/class/sensors/als_rear    als_raw_data            0444    system    system
+/sys/class/sensors/als_rear    als_debug               0664    system    system
+/sys/class/sensors/als_rear    flicker_data            0444    system    system
+/sys/class/sensors/als_rear    i2c_err_cnt             0664    system    system
+/sys/class/sensors/als_rear    int_pin_check           0444    system    system
+/sys/class/sensors/als_rear    mode_cnt                0664    system    system
+/sys/class/sensors/als_rear    curr_adc                0664    system    system
+/sys/class/sensors/als_rear    sensor_info             0444    system    system
+/dev/als_rear                                          0600    system    system
