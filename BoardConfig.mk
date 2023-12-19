@@ -167,3 +167,6 @@ TARGET_USES_LOGD := true
 
 # Backups
 TW_BACKUP_EXCLUSIONS := /data/fonts
+
+# Vendor Init
+TARGET_INIT_VENDOR_LIB := libinit_r8q
